@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: "9.1.1"
+          run_install: false
+
       - name: Checkout
         uses: actions/checkout@v4
 
