@@ -67,6 +67,10 @@ describe("toIPv6", () => {
       "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
     );
   });
+
+  test("2306139568115548160n should convert to 2001:db8::", () => {
+    expect(toIPv6(2306139568115548160n)).toBe("::2001:db8::");
+  });
 });
 
 describe("ipv6ToNumber", () => {
@@ -82,5 +86,9 @@ describe("ipv6ToNumber", () => {
     expect(ipv6ToNumber("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")).toBe(
       BigInt("340282366920938463463374607431768211455"),
     );
+  });
+
+  test("2001:db8:: should convert to 2306139568115548160n", () => {
+    expect(ipv6ToNumber("2001:db8::")).toBe(2306139568115548160n);
   });
 });
