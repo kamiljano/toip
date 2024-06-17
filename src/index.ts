@@ -78,3 +78,12 @@ export const toIPv6 = (ip: bigint): string => {
 
   return shortenIpV6(ipv6);
 };
+
+export const ipv6ToBigInt = (ip: string): BigInt => {
+  const segments = ip.split(":");
+  let hex = "";
+  for (let i = 0; i < segments.length; i++) {
+    hex += segments[i].padStart(4, "0");
+  }
+  return BigInt("0x" + hex);
+};
