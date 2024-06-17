@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { ipv4ToNumber, toIPv4 } from "../src/index";
+import { ipv4ToNumber, toIPv4, toIPv6 } from "../src/index";
 
 describe("toIPv4", () => {
   test("for -1 should throw an error", () => {
@@ -40,5 +40,31 @@ describe("ipv4ToNumber", () => {
     const result = ipv4ToNumber("255.255.255.255");
 
     expect(result).toBe(4294967295);
+  });
+});
+
+describe("toIPv6", () => {
+  test("for -1 should throw an error", () => {
+    expect(() => toIPv6(BigInt(-1))).toThrow(
+      `Invalid IP address. Must be between 0 and 340282366920938463463374607431768211455.`,
+    );
+  });
+
+  test("for 340282366920938463463374607431768211456 should throw an error", () => {
+    expect(() =>
+      toIPv6(BigInt("340282366920938463463374607431768211456")),
+    ).toThrow(
+      `Invalid IP address. Must be between 0 and 340282366920938463463374607431768211455.`,
+    );
+  });
+
+  test("should convert 0 to ::", () => {
+    expect(toIPv6(BigInt(0))).toBe("::");
+  });
+
+  test("should convert 340282366920938463463374607431768211455 to ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff", () => {
+    expect(toIPv6(BigInt("340282366920938463463374607431768211455"))).toBe(
+      "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+    );
   });
 });

@@ -45,3 +45,36 @@ export const ipv4ToNumber = (ip: string) => {
     partNumbers[3]
   );
 };
+
+const max128BitInteger = BigInt("340282366920938463463374607431768211455");
+const bigZero = BigInt(0);
+
+const shortenIpV6 = (ip: string[]) => {
+  const result = ip
+    .map((part) => {
+      for (let i = 0; i < part.length; i++) {
+        if (part[i] !== "0") {
+          return part.substring(i);
+        }
+      }
+      return part === "0000" ? "" : part;
+    })
+    .join(":");
+
+  return result === ":::::::" ? "::" : result;
+};
+
+export const toIPv6 = (ip: bigint): string => {
+  if (ip < bigZero || ip > max128BitInteger) {
+    throw new Error(
+      `Invalid IP address. Must be between 0 and ${max128BitInteger}.`,
+    );
+  }
+  let hex = ip.toString(16).padStart(32, "0");
+  let ipv6: string[] = [];
+  for (let i = 0; i < 32; i += 4) {
+    ipv6.push(hex.substring(i, i + 4));
+  }
+
+  return shortenIpV6(ipv6);
+};
