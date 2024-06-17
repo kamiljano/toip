@@ -1,18 +1,27 @@
 {
   "name": "toip",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Converts the IP addresses to their integer representation and vice versa.",
+  "main": "/dist/src/index.js",
+  "types": "/dist/src/index.d.ts",
   "engines": {
     "node": ">=20.12.0",
     "pnpm": ">=9.1.1"
   },
+  "files": [
+    "/dist"
+  ],
   "scripts": {
-    "test": "vitest run .",
-    "lint": "eslint . --ext .ts"
+    "test": "vitest run test",
+    "lint": "eslint . --ext .ts",
+    "build": "tsc"
   },
-  "engineStrict": true,
-  "keywords": [],
+  "keywords": [
+    "ip",
+    "IPv4",
+    "network",
+    "conversion"
+  ],
   "author": "Kamil Janowski <kgjanowski@gmail.com>",
   "license": "ISC",
   "devDependencies": {
@@ -24,7 +33,6 @@
     "prettier": "^3.2.5",
     "vitest": "^1.6.0",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.8.0",
-    "tsx": "^4.15.5"
+    "@typescript-eslint/parser": "^7.8.0"
   }
 }
