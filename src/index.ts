@@ -90,7 +90,7 @@ export const toIPv6 = (ip: bigint): string => {
  * @param ip - The IPv6 address
  * @returns bigint representation of the IPv6 address
  */
-export const ipv6ToNumber = (ip: string): BigInt => {
+export const ipv6ToNumber = (ip: string): bigint => {
   const segments = ip.split(":");
   let hex = "";
   for (let i = 0; i < segments.length; i++) {
