@@ -64,6 +64,11 @@ const shortenIpV6 = (ip: string[]) => {
   return result === ":::::::" ? "::" : result;
 };
 
+/**
+ * Converts a 128-bit number to an IPv6 address.
+ * @param ip - The numeric representation of the IPv6 address between 0 and 340282366920938463463374607431768211455
+ *             Use the BigInt function to create a number larger than Number.MAX_SAFE_INTEGER
+ */
 export const toIPv6 = (ip: bigint): string => {
   if (ip < bigZero || ip > max128BitInteger) {
     throw new Error(
@@ -79,7 +84,13 @@ export const toIPv6 = (ip: bigint): string => {
   return shortenIpV6(ipv6);
 };
 
-export const ipv6ToBigInt = (ip: string): BigInt => {
+/**
+ * Converts an IPv6 address to a number.
+ *
+ * @param ip - The IPv6 address
+ * @returns bigint representation of the IPv6 address
+ */
+export const ipv6ToNumber = (ip: string): BigInt => {
   const segments = ip.split(":");
   let hex = "";
   for (let i = 0; i < segments.length; i++) {

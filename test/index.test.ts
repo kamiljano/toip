@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { ipv4ToNumber, ipv6ToBigInt, toIPv4, toIPv6 } from "../src/index";
+import { ipv4ToNumber, ipv6ToNumber, toIPv4, toIPv6 } from "../src/index";
 
 describe("toIPv4", () => {
   test("for -1 should throw an error", () => {
@@ -36,7 +36,7 @@ describe("ipv4ToNumber", () => {
     expect(result).toBe(0);
   });
 
-  test("for 255.255.255.255 should return 9007199254740991", () => {
+  test("for 255.255.255.255 should return 4294967295", () => {
     const result = ipv4ToNumber("255.255.255.255");
 
     expect(result).toBe(4294967295);
@@ -69,17 +69,17 @@ describe("toIPv6", () => {
   });
 });
 
-describe("ipv6ToBigInt", () => {
+describe("ipv6ToNumber", () => {
   test("should convert 0000:0000:0000:0000:0000:0000:0000:0000 to 0", () => {
-    expect(ipv6ToBigInt("::")).toBe(BigInt(0));
+    expect(ipv6ToNumber("::")).toBe(BigInt(0));
   });
 
   test("should convert :: to 0", () => {
-    expect(ipv6ToBigInt("::")).toBe(BigInt(0));
+    expect(ipv6ToNumber("::")).toBe(BigInt(0));
   });
 
   test("should convert ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff to 340282366920938463463374607431768211455", () => {
-    expect(ipv6ToBigInt("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")).toBe(
+    expect(ipv6ToNumber("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")).toBe(
       BigInt("340282366920938463463374607431768211455"),
     );
   });
