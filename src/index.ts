@@ -61,7 +61,7 @@ const shortenIpV6 = (ip: string[]) => {
     })
     .join(":");
 
-  return result === ":::::::" ? "::" : result;
+  return result.replaceAll(":0000:", "::").replaceAll(/:{2,}/g, "::");
 };
 
 /**
