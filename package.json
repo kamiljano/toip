@@ -1,6 +1,6 @@
 {
   "name": "toip",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Converts the IP addresses to their integer representation and vice versa.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

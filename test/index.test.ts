@@ -62,6 +62,12 @@ describe("toIPv6", () => {
     expect(toIPv6(BigInt(0))).toBe("::");
   });
 
+  test("should convert 0 to 0000:0000:0000:0000:0000:0000:0000:0000 if shortening is disabled", () => {
+    expect(toIPv6(BigInt(0), false)).toBe(
+      "0000:0000:0000:0000:0000:0000:0000:0000",
+    );
+  });
+
   test("should convert 340282366920938463463374607431768211455 to ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff", () => {
     expect(toIPv6(BigInt("340282366920938463463374607431768211455"))).toBe(
       "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",

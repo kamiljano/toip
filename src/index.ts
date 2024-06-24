@@ -68,8 +68,10 @@ const shortenIpV6 = (ip: string[]) => {
  * Converts a 128-bit number to an IPv6 address.
  * @param ip - The numeric representation of the IPv6 address between 0 and 340282366920938463463374607431768211455
  *             Use the BigInt function to create a number larger than Number.MAX_SAFE_INTEGER
+ * @param short - {@default true} - Whether to shorten the IPv6 address. Technically 0000:0000:0000:0000:0000:0000:0000:0000 can be shortened to ::
+ *              Both representations are valid, but the short one is more common. Then again, it's an extra computational overhead.
  */
-export const toIPv6 = (ip: bigint): string => {
+export const toIPv6 = (ip: bigint, short: boolean = true): string => {
   if (ip < bigZero || ip > max128BitInteger) {
     throw new Error(
       `Invalid IP address. Must be between 0 and ${max128BitInteger}.`,
@@ -81,7 +83,7 @@ export const toIPv6 = (ip: bigint): string => {
     ipv6.push(hex.substring(i, i + 4));
   }
 
-  return shortenIpV6(ipv6);
+  return short ? shortenIpV6(ipv6) : ipv6.join(":");
 };
 
 /**
